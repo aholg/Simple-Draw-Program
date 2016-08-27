@@ -23,17 +23,25 @@ public class ControllerTest {
 
 
 	/**
-	 * Simple test function for testing the parsing of commands. Complete test cases for the whole program needs to be done.
+	 * Simple test function for testing the parsing and execution of commands.
+	 * Complete test cases for the whole program needs to be done.
 	 */
 	@Test
-	public void testNewCommand() {
+	public void testNewCommand() throws NoCommandFoundException, Exception {
 		
 		
 			doTestIllegalCommand("asfhaghag");
 			doTestIllegalCommand("null");
 			doTestIllegalCommand("C 0 0");
 			doTestIllegalCommand("C 02 02");
+			doTestIllegalCommand("L 02 02 02 0");
+			doTestIllegalCommand("R 02 02 02 0");
+			doTestIllegalCommand("B 02 02 0");
 			doTestIllegalCommand("c2020");
+			doTestIllegalCommand("L 10 10 15 10");
+			doTestIllegalCommand("R 10 10 15 10");
+			doTestIllegalCommand("B 10 10 1");
+			
 			
 			doTestEligibleCommand("C 20 20");
 			doTestEligibleCommand("C 40 20");
@@ -57,14 +65,14 @@ public class ControllerTest {
 			// success
 			
 		}catch(Exception e){
-			fail("did not throw a NoCommandFoundException for fault command: "+ input);
+			//success
 		}
 	}
 	public void doTestEligibleCommand(String input){
 		try {
 			controller.newCommand(input);
 		} catch (NoCommandFoundException e) {
-			fail("An exception was thrown for: "+ input);
+			fail("A NoCommandFoundException was thrown for: "+ input);
 		}
 		catch(Exception e){
 			fail("An exception was thrown for: "+ input);

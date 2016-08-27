@@ -68,6 +68,8 @@ public class Controller {
 			observer.notify("Color area: B x y c");
 			observer.notify("Quit: Q");
 			return;
+		}else if(canvas==null){
+			throw new Exception("Canvas needs to be created before drawing shapes.");
 		}
 
 		canvas.printCanvas();
