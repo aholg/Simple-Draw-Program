@@ -5,6 +5,11 @@ import java.util.Scanner;
 import aholg.controller.Controller;
 import aholg.model.Observer;
 
+/**
+ * This class takes commands from the standard inputstream and passes it on to the controller.
+ * @author Anton
+ *
+ */
 public class Console implements Observer {
 
 	public Console() {
@@ -23,6 +28,11 @@ public class Console implements Observer {
 		}
 	}
 
+	 /**
+     * Prints output to stdout.
+     *
+     * @param output String to be printed.
+     */
 	@Override
 	public void notify(String result) {
 		System.out.println(result);

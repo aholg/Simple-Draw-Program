@@ -2,14 +2,30 @@ package aholg.model;
 
 import java.util.ArrayList;
 
-
+/**
+ * This class holds the canvas matrix and adds new shapes and colors to it.
+ * 
+ * @author Anton
+ *
+ */
 public class Canvas {
 	private int width;
 	private int height;
 	private String[][] canvasBoard;
 	private ArrayList<Observer> observers;
 
-	public Canvas(int width, int height) {
+	/**
+	 * Constructor for a new canvas.
+	 * 
+	 * @param width
+	 *            - Canvas width.
+	 * @param height
+	 *            - Canvas height.
+	 * @throws Exception
+	 *             - Exception if height or width are below 1.
+	 */
+	public Canvas(int width, int height) throws Exception {
+		checkCanvas(width, height);
 		observers = new ArrayList();
 		this.width = width;
 		this.height = height;
@@ -19,11 +35,16 @@ public class Canvas {
 
 	/**
 	 * Creates a new line and puts it in the canvasboard matrix.
-	 * @param line - object containing coordinates.
-	 * @throws IndexOutOfBoundsException - Throws out of bounds error if rectangle coordinates are outside the canvas borders.
-	 * @throws Exception - Throws exception for unsupported diagonal lines.
+	 * 
+	 * @param line
+	 *            - object containing coordinates.
+	 * @throws IndexOutOfBoundsException
+	 *             - Throws out of bounds error if rectangle coordinates are
+	 *             outside the canvas borders.
+	 * @throws Exception
+	 *             - Throws exception for unsupported diagonal lines.
 	 */
-	public void newLine(Line line) throws IndexOutOfBoundsException,Exception {
+	public void newLine(Line line) throws IndexOutOfBoundsException, Exception {
 		int posx, posy;
 		int x1 = line.getX1();
 		int x2 = line.getX2();
@@ -61,10 +82,14 @@ public class Canvas {
 
 	/**
 	 * Creates a new rectangle and puts it on the canvas matrix.
-	 * @param rectangle - object containing coordinates for the rectangle.
-	 * @throws IndexOutOfBoundsException - Throws out of bounds error if rectangle coordinates are outside the canvas borders.
+	 * 
+	 * @param rectangle
+	 *            - object containing coordinates for the rectangle.
+	 * @throws IndexOutOfBoundsException
+	 *             - Throws out of bounds error if rectangle coordinates are
+	 *             outside the canvas borders.
 	 */
-	public void newRectangle(Rectangle rectangle) throws IndexOutOfBoundsException,Exception {
+	public void newRectangle(Rectangle rectangle) throws IndexOutOfBoundsException, Exception {
 		int x1 = rectangle.getX1();
 		int x2 = rectangle.getX2();
 		int y1 = rectangle.getY1();
@@ -78,12 +103,17 @@ public class Canvas {
 
 	/**
 	 * Flood fill algorithm for coloring the canvas.
-	 * @param x	- X coordinate for the node to be checked.
-	 * @param y - Y coordinate for the node to be checked.
-	 * @param targetColor - Target color to be changed.
-	 * @param replacementColor - Replacement color to be used.
+	 * 
+	 * @param x
+	 *            - X coordinate for the node to be checked.
+	 * @param y
+	 *            - Y coordinate for the node to be checked.
+	 * @param targetColor
+	 *            - Target color to be changed.
+	 * @param replacementColor
+	 *            - Replacement color to be used.
 	 */
-	public void floodFill(int x, int y, String targetColor, String replacementColor) {
+	private void floodFill(int x, int y, String targetColor, String replacementColor) {
 		if (targetColor.equals(replacementColor)) {
 			return;
 		} else if (canvasBoard[y][x].equals(targetColor) == false) {
@@ -98,6 +128,13 @@ public class Canvas {
 
 	}
 
+	/**
+	 * Fills an area on the canvas with color starting from a given coordinate
+	 * provided by a color object.
+	 * 
+	 * @param color
+	 *            - Color object containing new color and coordinates.
+	 */
 	public void colorFill(Color color) {
 		int x = color.getX();
 		int y = color.getY();
@@ -107,6 +144,9 @@ public class Canvas {
 
 	}
 
+	/**
+	 * 	Creates a new canvas matrix according to the width and height entered in the constructor.
+	 */
 	public void newCanvas() {
 
 		for (int row = 0; row <= height + 1; row++) {
@@ -124,6 +164,9 @@ public class Canvas {
 
 	}
 
+	/**
+	 * Prints the canvas matrix to a string and notifies the registered observers.
+	 */
 	public void printCanvas() {
 		StringBuffer result = new StringBuffer();
 		for (int i = 0; i < canvasBoard.length; i++) {
@@ -140,6 +183,14 @@ public class Canvas {
 		notify(result.toString());
 	}
 
+	/**
+	 * Checks that coordinates are within the canvas area.
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @throws IndexOutOfBoundsException - Thrown if a value was outside the area.
+	 */
 	private void checkIndexes(int x1, int y1, int x2, int y2) throws IndexOutOfBoundsException {
 		if (x1 < 1 || x1 > width) {
 			throw new IndexOutOfBoundsException("Value x1 is outside of canvas: " + x1);
@@ -152,6 +203,12 @@ public class Canvas {
 		}
 	}
 
+	/**
+	 * Checks that coordinates are within the canvas area.
+	 * @param x1
+	 * @param y1
+	 * @throws IndexOutOfBoundsException - Thrown if a value was outside the area.
+	 */
 	private void checkIndexes(int x1, int y1) throws IndexOutOfBoundsException {
 		if (x1 < 1 || x1 > width) {
 			throw new IndexOutOfBoundsException("Value x1 is outside of canvas: " + x1);
@@ -161,10 +218,24 @@ public class Canvas {
 	}
 
 	/**
+	 * Checks that given width and height are larger than 0 for a new canvas object.
+	 * @param width
+	 * @param height
+	 * @throws Exception - Thrown if width or height was below 0.
+	 */
+	private void checkCanvas(int width, int height) throws Exception {
+		if (width < 1) {
+			throw new Exception("Invalid width size, please enter a width bigger than 0.");
+		} else if (height < 1) {
+			throw new Exception("Invalid height size, please enter a width bigger than 0.");
+		}
+	}
+
+	/**
 	 * Notify all added observers(console) with a given ouput.
 	 *
-	 * @param output
-	 *            Output to notify observers with.
+	 * @param output - Output to notify observers with.
+	 *            
 	 */
 	private void notify(String output) {
 

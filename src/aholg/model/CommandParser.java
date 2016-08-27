@@ -6,11 +6,11 @@ package aholg.model;
  *
  */
 public class CommandParser {
-	//stopped here make zeroes
-	private static final String CANVAS_COMMAND = "C\\s[1-9]\\d*\\s[1-9]\\d*";
+	
+	private static final String CANVAS_COMMAND = "C\\s[0-9]\\d*\\s[0-9]\\d*";
 	private static final String LINE_COMMAND = "L\\s[0-9]\\d*\\s[0-9]\\d*\\s[0-9]\\d*\\s[0-9]\\d*";
-	private static final String RECTANGLE_COMMAND = "R\\s[1-9]\\d*\\s[1-9]\\d*\\s[1-9]\\d*\\s[1-9]\\d*";
-	private static final String BUCKET_COMMAND = "B\\s[1-9]\\d*\\s[1-9]\\d*\\s[A-Za-z0-9]?";
+	private static final String RECTANGLE_COMMAND = "R\\s[0-9]\\d*\\s[0-9]\\d*\\s[0-9]\\d*\\s[0-9]\\d*";
+	private static final String BUCKET_COMMAND = "B\\s[0-9]\\d*\\s[0-9]\\d*\\s[A-Za-z0-9]?";
 	private static final String QUIT_COMMAND = "Q";
 
 	/**

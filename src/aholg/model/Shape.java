@@ -1,5 +1,11 @@
 package aholg.model;
 
+
+/**
+ * Abstract class that takes two coordinates and can be extended for a specific shape.
+ * @author Anton
+ *
+ */
 public abstract class Shape {
 	private int x1;
 	private int y1;

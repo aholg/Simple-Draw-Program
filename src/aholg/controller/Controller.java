@@ -72,6 +72,12 @@ public class Controller {
 		canvas.printCanvas();
 	}
 
+	/**
+	 * Parses a string and creates a new command if match was found.
+	 * @param input - Input to be parsed.
+	 * @return - An object containing information about a command.
+	 * @throws Exception - Thrown if no matching command was found.
+	 */
 	public Command parseInput(String input) throws Exception {
 		return parser.parseInput(input);
 	}
