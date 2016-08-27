@@ -7,10 +7,10 @@ package aholg.model;
  */
 public class CommandParser {
 	
-	private static final String CANVAS_COMMAND = "C\\s[0-9]\\d*\\s[0-9]\\d*";
-	private static final String LINE_COMMAND = "L\\s[0-9]\\d*\\s[0-9]\\d*\\s[0-9]\\d*\\s[0-9]\\d*";
-	private static final String RECTANGLE_COMMAND = "R\\s[0-9]\\d*\\s[0-9]\\d*\\s[0-9]\\d*\\s[0-9]\\d*";
-	private static final String BUCKET_COMMAND = "B\\s[0-9]\\d*\\s[0-9]\\d*\\s[A-Za-z0-9]?";
+	private static final String CANVAS_COMMAND = "C\\s[1-9]\\d*\\s[1-9]\\d*";
+	private static final String LINE_COMMAND = "L\\s[1-9]\\d*\\s[1-9]\\d*\\s[1-9]\\d*\\s[1-9]\\d*";
+	private static final String RECTANGLE_COMMAND = "R\\s[1-9]\\d*\\s[1-9]\\d*\\s[1-9]\\d*\\s[1-9]\\d*";
+	private static final String BUCKET_COMMAND = "B\\s[1-9]\\d*\\s[1-9]\\d*\\s[A-Za-z0-9]?";
 	private static final String QUIT_COMMAND = "Q";
 
 	/**
@@ -22,7 +22,7 @@ public class CommandParser {
 	 * @throws Exception
 	 *             Exception if no matching command was found.
 	 */
-	public Command parseInput(String input) throws Exception {
+	public Command parseInput(String input) throws NoCommandFoundException,Exception {
 		String trimmedInput = input.trim();
 
 		if (trimmedInput.matches(CANVAS_COMMAND)) {
@@ -56,7 +56,7 @@ public class CommandParser {
 		} else if (input.matches("help")) {
 			return new Command("Help", null, null, null);
 		} else {
-			throw new Exception(
+			throw new NoCommandFoundException(
 					"The input '" + input + "' did not match any known command. Type help to get list of commands.");
 		}
 

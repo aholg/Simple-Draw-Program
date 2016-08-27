@@ -4,6 +4,7 @@ import aholg.model.Canvas;
 import aholg.model.Command;
 import aholg.model.CommandParser;
 import aholg.model.Line;
+import aholg.model.NoCommandFoundException;
 import aholg.model.Observer;
 import aholg.model.Rectangle;
 
@@ -32,10 +33,10 @@ public class Controller {
 	 * @param input			Input String to parse.
 	 * @throws Exception	Exception if unexpected null was returned from the parser method.
 	 */
-	public void newCommand(String input) throws Exception {
+	public void newCommand(String input) throws NoCommandFoundException,Exception {
 		Command command = parseInput(input);
 		if (command == null) {
-			throw new Exception("Command not found");
+			throw new NoCommandFoundException("Command not found");
 		}
 		String type = command.getType();
 		if (type.equals("Canvas")) {
@@ -78,7 +79,7 @@ public class Controller {
 	 * @return - An object containing information about a command.
 	 * @throws Exception - Thrown if no matching command was found.
 	 */
-	public Command parseInput(String input) throws Exception {
+	private Command parseInput(String input) throws NoCommandFoundException,Exception {
 		return parser.parseInput(input);
 	}
 }
