@@ -12,11 +12,11 @@ import aholg.model.Observer;
  */
 public class Console implements Observer {
 
-	public Console() {
+	public Console(boolean run) {
 		String input;
 		Controller controller = new Controller(this);
-		boolean quit = false;
-		while (quit == false) {
+		
+		while (run ==true) {
 			System.out.println("Enter a command: ");
 			Scanner in = new Scanner(System.in);
 			input = in.nextLine();

@@ -9,13 +9,16 @@ import org.junit.Test;
 
 
 import aholg.model.NoCommandFoundException;
+import aholg.view.Console;
 
 
 public class ControllerTest {
 	private Controller controller;
+	private Console console;
 	@Before
 	public void setUp() throws Exception {
-		this.controller=new Controller(null);
+		this.console=new Console(false);
+		this.controller=new Controller(console);
 	}
 
 
@@ -64,7 +67,7 @@ public class ControllerTest {
 			fail("An exception was thrown for: "+ input);
 		}
 		catch(Exception e){
-			
+			fail("An exception was thrown for: "+ input);
 		}
 	}
 
