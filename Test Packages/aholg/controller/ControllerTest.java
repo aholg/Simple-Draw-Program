@@ -51,6 +51,8 @@ public class ControllerTest {
 			doTestEligibleCommand("B 10 10 1");
 			doTestEligibleCommand("B 1 10 h");
 			doTestEligibleCommand("B 1 10 L");
+			doTestEligibleCommand("C 1000 2000");
+			doTestEligibleCommand("B 1 10 i");
 			doTestEligibleCommand("Q");
 		}
 		
