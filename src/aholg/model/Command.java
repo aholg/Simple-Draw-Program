@@ -9,7 +9,7 @@ package aholg.model;
 public class Command {
 	private String type;
 	private Shape shape;
-	private Color color;
+	private Node color;
 	private Canvas canvas;
 	
 	/**
@@ -19,7 +19,7 @@ public class Command {
 	 * @param color - If type is 'Bucket' then a color object is stored here, otherwise null.
 	 * @param canvas - If type is 'Canvas' then a canvas object is stored, otherwise null.
 	 */
-	public Command(String type, Shape shape, Color color, Canvas canvas) {
+	public Command(String type, Shape shape, Node color, Canvas canvas) {
 		
 		this.type = type;
 		this.shape = shape;
@@ -32,7 +32,7 @@ public class Command {
 	public Shape getShape() {
 		return shape;
 	}
-	public Color getColor() {
+	public Node getColor() {
 		return color;
 	}
 	public Canvas getCanvas() {

@@ -1,6 +1,8 @@
 package aholg.model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * This class holds the canvas matrix and adds new shapes and colors to it.
@@ -104,27 +106,56 @@ public class Canvas {
 	/**
 	 * Flood fill algorithm for coloring the canvas.
 	 * 
-	 * @param x
-	 *            - X coordinate for the node to be checked.
-	 * @param y
-	 *            - Y coordinate for the node to be checked.
+	 * @param Node
+	 *            - contains x and y coordinate and color of the node.
 	 * @param targetColor
 	 *            - Target color to be changed.
 	 * @param replacementColor
 	 *            - Replacement color to be used.
 	 */
-	private void floodFill(int x, int y, String targetColor, String replacementColor) {
+	private void floodFill(Node node, String targetColor, String replacementColor) {
 		if (targetColor.equals(replacementColor)) {
 			return;
-		} else if (canvasBoard[y][x].equals(targetColor) == false) {
-			return;
-		} else {
-			canvasBoard[y][x] = replacementColor;
 		}
-		floodFill(x, y + 1, targetColor, replacementColor);
-		floodFill(x, y - 1, targetColor, replacementColor);
-		floodFill(x - 1, y, targetColor, replacementColor);
-		floodFill(x + 1, y, targetColor, replacementColor);
+
+		Queue<Node> q = new LinkedList<>();
+
+		int[][] nodeMap = new int[height + 2][width + 2];
+		q.add(node);
+
+		while (q.isEmpty() == false) {
+			node = q.remove();
+			
+			int x = node.getX();
+			int y = node.getY();
+
+			if (node.getColor().equals(targetColor)) {
+
+				canvasBoard[y][x] = replacementColor;
+				if (nodeMap[y][x - 1] == 0) {
+
+					q.add(new Node(x - 1, y, canvasBoard[y][x - 1]));
+					nodeMap[y][x - 1] = 1;
+				}
+				if (nodeMap[y][x + 1] == 0) {
+
+					q.add(new Node(x + 1, y, canvasBoard[y][x + 1]));
+					nodeMap[y][x + 1] = 1;
+				}
+				if (nodeMap[y + 1][x] == 0) {
+
+					q.add(new Node(x, y + 1, canvasBoard[y + 1][x]));
+					nodeMap[y + 1][x] = 1;
+				}
+				if (nodeMap[y - 1][x] == 0) {
+
+					q.add(new Node(x, y - 1, canvasBoard[y - 1][x]));
+					nodeMap[y - 1][x] = 1;
+				}
+
+			}
+
+		}
 
 	}
 
@@ -135,17 +166,19 @@ public class Canvas {
 	 * @param color
 	 *            - Color object containing new color and coordinates.
 	 */
-	public void colorFill(Color color) {
+	public void colorFill(Node color) {
 		int x = color.getX();
 		int y = color.getY();
 		checkIndexes(x, y);
 		String paint = color.getColor();
-		floodFill(x, y, canvasBoard[y][x], paint);
+		Node node = new Node(x, y, canvasBoard[y][x]);
+		floodFill(node, canvasBoard[y][x], paint);
 
 	}
 
 	/**
-	 * 	Creates a new canvas matrix according to the width and height entered in the constructor.
+	 * Creates a new canvas matrix according to the width and height entered in
+	 * the constructor.
 	 */
 	public void newCanvas() {
 
@@ -165,7 +198,8 @@ public class Canvas {
 	}
 
 	/**
-	 * Prints the canvas matrix to a string and notifies the registered observers.
+	 * Prints the canvas matrix to a string and notifies the registered
+	 * observers.
 	 */
 	public void printCanvas() {
 		StringBuffer result = new StringBuffer();
@@ -185,11 +219,13 @@ public class Canvas {
 
 	/**
 	 * Checks that coordinates are within the canvas area.
+	 * 
 	 * @param x1
 	 * @param y1
 	 * @param x2
 	 * @param y2
-	 * @throws IndexOutOfBoundsException - Thrown if a value was outside the area.
+	 * @throws IndexOutOfBoundsException
+	 *             - Thrown if a value was outside the area.
 	 */
 	private void checkIndexes(int x1, int y1, int x2, int y2) throws IndexOutOfBoundsException {
 		if (x1 < 1 || x1 > width) {
@@ -205,9 +241,11 @@ public class Canvas {
 
 	/**
 	 * Checks that coordinates are within the canvas area.
+	 * 
 	 * @param x1
 	 * @param y1
-	 * @throws IndexOutOfBoundsException - Thrown if a value was outside the area.
+	 * @throws IndexOutOfBoundsException
+	 *             - Thrown if a value was outside the area.
 	 */
 	private void checkIndexes(int x1, int y1) throws IndexOutOfBoundsException {
 		if (x1 < 1 || x1 > width) {
@@ -218,10 +256,13 @@ public class Canvas {
 	}
 
 	/**
-	 * Checks that given width and height are larger than 0 for a new canvas object.
+	 * Checks that given width and height are larger than 0 for a new canvas
+	 * object.
+	 * 
 	 * @param width
 	 * @param height
-	 * @throws Exception - Thrown if width or height was below 0.
+	 * @throws Exception
+	 *             - Thrown if width or height was below 0.
 	 */
 	private void checkCanvas(int width, int height) throws Exception {
 		if (width < 1) {
@@ -234,8 +275,9 @@ public class Canvas {
 	/**
 	 * Notify all added observers(console) with a given ouput.
 	 *
-	 * @param output - Output to notify observers with.
-	 *            
+	 * @param output
+	 *            - Output to notify observers with.
+	 * 
 	 */
 	private void notify(String output) {
 

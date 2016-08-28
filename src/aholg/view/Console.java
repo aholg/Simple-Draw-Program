@@ -12,6 +12,10 @@ import aholg.model.Observer;
  */
 public class Console implements Observer {
 
+	/**
+	 * Reads input from stdin and passes it to the controller.
+	 * @param run - Run while run==true.
+	 */
 	public Console(boolean run) {
 		String input;
 		Controller controller = new Controller(this);

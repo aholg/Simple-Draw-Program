@@ -50,7 +50,7 @@ public class CommandParser {
 			int y = Integer.parseInt(split[2]);
 			String color = split[3];
 
-			return new Command("Bucket", null, new Color(x, y, color), null);
+			return new Command("Bucket", null, new Node(x, y, color), null);
 		} else if (input.matches(QUIT_COMMAND)) {
 			return new Command("Quit", null, null, null);
 		} else if (input.matches("help")) {

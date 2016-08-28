@@ -5,21 +5,22 @@ package aholg.model;
  * @author Anton
  *
  */
-public class Color {
+public class Node  {
 	private String color;
 	private int x;
 	private int y;
-	
+	private boolean processed;
 	/**
 	 * Creates a new color object.
 	 * @param x - X coordinate.
 	 * @param y - Y coordinate.
 	 * @param color - Color to be used.
 	 */
-	public Color(int x,int y, String color){
+	public Node(int x,int y, String color) {
 		this.color=color;
 		this.x=x;
 		this.y=y;
+		setProcessed(false);
 	}
 	String getColor() {
 		return color;
@@ -30,4 +31,11 @@ public class Color {
 	int getY() {
 		return y;
 	}
+	boolean isProcessed() {
+		return processed;
+	}
+	void setProcessed(boolean processed) {
+		this.processed = processed;
+	}
+
 }
