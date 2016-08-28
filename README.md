@@ -1,7 +1,7 @@
 # Simple-Draw-Program
 
-Junit framework used to aid in testing everything else is built with standard java library. Decided to go for a more conventional implementation of
-the flood fill algorithm to allow larger values. This probably means a speed trade off compared to a recursive solution but it was required to avoid stackoverflow
+Junit framework was used to aid in testing, everything else was built with standard java library. Decided to go for a more conventional implementation of
+the flood fill algorithm to allow larger values. This probably means a speed trade off compared to a recursive solution, but it was required to avoid stackoverflow
 error with larger values.
 
 
