@@ -161,10 +161,10 @@ public class Canvas {
 
 	/**
 	 * Fills an area on the canvas with color starting from a given coordinate
-	 * provided by a color object.
+	 * provided by a node object.
 	 * 
 	 * @param color
-	 *            - Color object containing new color and coordinates.
+	 *            - Node object containing new color and coordinates.
 	 */
 	public void colorFill(Node color) {
 		int x = color.getX();

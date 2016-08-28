@@ -16,7 +16,7 @@ public class Command {
 	 * Creates a new command.
 	 * @param type - Holds the type of command: 'Canvas','Line','Rectangle','Bucket','Quit','Help'.
 	 * @param shape - If type is either a 'Line' or 'Rectangle' then the shape of that type is stored in this param, otherwise it is null.
-	 * @param color - If type is 'Bucket' then a color object is stored here, otherwise null.
+	 * @param color - If type is 'Bucket' then a node object is stored here, otherwise null.
 	 * @param canvas - If type is 'Canvas' then a canvas object is stored, otherwise null.
 	 */
 	public Command(String type, Shape shape, Node color, Canvas canvas) {
