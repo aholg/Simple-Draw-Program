@@ -2,6 +2,7 @@ package aholg.controller;
 
 import aholg.model.Canvas;
 import aholg.model.Command;
+import aholg.model.Command.Type;
 import aholg.model.CommandParser;
 import aholg.model.Line;
 import aholg.model.NoCommandFoundException;
@@ -46,35 +47,37 @@ public class Controller {
 		if (command == null) {
 			throw new NoCommandFoundException("Command not found");
 		}
-		String type = command.getType();
-		if (type.equals("Canvas")) {
+		Type type = command.getType();
+		if (type==Type.CANVAS) {
 			canvas = command.getCanvas();
 			canvas.addObserver(observer);
 			canvas.newCanvas();
 
 		}
 		if (canvas != null) {
-			if (type.equals("Line")) {
+			if (type==Type.LINE) {
 
 				canvas.newLine((Line) command.getShape());
 
-			} else if (type.equals("Rectangle")) {
+			} else if (type==Type.RECTANGLE) {
 
 				canvas.newRectangle((Rectangle) command.getShape());
 
-			} else if (type.equals("Bucket")) {
+			} else if (type==Type.BUCKET) {
 
 				canvas.colorFill(command.getColor());
 
-			} else if (type.equals("Quit")) {
+			} else if (type==Type.QUIT) {
 				System.exit(1);
-			} else if (type.equals("Help")) {
+			} else if (type==Type.HELP) {
 				observer.notify("Create canvas: C w h");
 				observer.notify("Create line: L x1 y1 x2 y2");
 				observer.notify("Create rectangle: R x1 y1 x2 y2");
 				observer.notify("Color area: B x y c");
 				observer.notify("Quit: Q");
 				return;
+			}else if(type==Type.CLEAR){
+				canvas.clear();
 			}
 		} else {
 			throw new Exception("Canvas needs to be created before drawing shapes.");

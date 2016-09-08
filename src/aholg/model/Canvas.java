@@ -272,6 +272,10 @@ public class Canvas {
 		}
 	}
 
+	public void clear(){
+		newCanvas();
+	}
+	
 	/**
 	 * Notify all added observers(console) with a given ouput.
 	 *
